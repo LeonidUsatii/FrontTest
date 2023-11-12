@@ -16,7 +16,7 @@ export async function user(): Promise<{
 }
 
 export async function login(credentials: Credentials): Promise<User> {
-	const res = await fetch('https://walrus-app-ie6jv.ondigitalocean.app//api/login', {
+	const res = await fetch('https://walrus-app-ie6jv.ondigitalocean.app/api/login', {
 		method: 'POST',
 		body: `username=${credentials.email}&password=${credentials.password}`,
 		headers: {
@@ -55,7 +55,7 @@ export async function register(data: RegisterData): Promise<{ id: number; email:
 }
 
 export async function logout(): Promise<void> {
-	await fetch('https://walrus-app-ie6jv.ondigitalocean.app//api/logout', {
+	await fetch('https://walrus-app-ie6jv.ondigitalocean.app/api/logout', {
 		method: 'PUT',
 	});
 }
