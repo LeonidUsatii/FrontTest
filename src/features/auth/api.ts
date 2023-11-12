@@ -33,7 +33,7 @@ export async function login(credentials: Credentials): Promise<User> {
 }
 
 export async function register(data: RegisterData): Promise<{ id: number; email: string }> {
-	const res = await fetch('http://8080/api/register', {
+	const res = await fetch('http://localhost:8080/api/register', {
 		method: 'POST',
 		body: JSON.stringify(data),
 		headers: {
