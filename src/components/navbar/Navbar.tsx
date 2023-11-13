@@ -3,6 +3,9 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { logout } from '../../features/auth/authSlice';
 import { selectUser } from '../../features/auth/selectors';
+import Navin from './NavIn';
+// eslint-disable-next-line import/no-unresolved
+import Navout from './Navout';
 
 function Navbar(): JSX.Element {
 	const dispatch = useAppDispatch();
@@ -20,30 +23,59 @@ function Navbar(): JSX.Element {
 		},
 		[dispatch, navigate]
 	);
+	const container = {
+		margin: 0,
+	};
+
 	return (
-		<nav>
-			{!user ? (
-				<>
-					<NavLink to="/auth/login">Войти</NavLink>
-					<NavLink to="/auth/register">Регистрация</NavLink>
-				</>
-			) : location.pathname === '/' ? (
-				user.role === 'ADMIN' ? (
-					<NavLink to="/admin/tasks">Задачи всех пользователей</NavLink>
-				) : (
-					<NavLink to="/tasks">Задачи текущего пользователя</NavLink>
-				)
-			) : (
-				<NavLink to="/" onClick={handleLogout}>
-					На главную
-				</NavLink>
-			)}
-			{user && (
-				<NavLink to="" onClick={handleLogout}>
-					Выйти
-				</NavLink>
-			)}
-		</nav>
+		<>{!user?.role ? <Navin /> : <Navout />}</>
+
+		// <nav>
+		// 	{!user ? (
+		// 		<>
+		// 			<NavLink to="/auth/login">Войти</NavLink>
+		// 			<NavLink to="/auth/register">Регистрация</NavLink>
+		// 			{/* <NavLink to="/auth/confirm">Конфирм</NavLink> */}
+		// 		</>
+		// 	) : (
+		// 		<>
+		// 			<NavLink to="/auth/login">Войти</NavLink>
+		// 			<NavLink to="/auth/register">Регистрация</NavLink>
+		// 			<NavLink to="/auth/confirm">Конфирм </NavLink>
+		// 			<NavLink to="" onClick={handleLogout}>
+		// 				Выйти
+		// 			</NavLink>
+		// 			{user.email}
+		// 		</>
+		// 		// <UserName />
+		// 	)}
+		// </nav>
+
+		// <nav>
+		// 	{!user ? (
+		// 		<>
+		// 			<NavLink to="/auth/login">Войти</NavLink>
+		// 			<NavLink to="/auth/register">Регистрация</NavLink>
+		// 			{/* <NavLink to="/auth/confirm">Конфирм</NavLink> */}
+		// 		</>
+		// 	) : location.pathname === '/' ? (
+		// 		user.role === 'ADMIN' ? (
+		// 			<NavLink to="/admin/tasks">Задачи всех пользователей</NavLink>
+		// 		) : (
+		// 			<NavLink to="/tasks">Задачи текущего пользователя</NavLink>
+		// 		)
+		// 	) : (
+		// 		<NavLink to="/" onClick={handleLogout}>
+		// 			На главную
+		// 		</NavLink>
+		// 	)}
+
+		// 	{user && (
+		// 		<NavLink to="" onClick={handleLogout}>
+		// 			Выйти
+		// 		</NavLink>
+		// 	)}
+		// </nav>
 	);
 }
 

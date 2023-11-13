@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import './App.css';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { useEffect } from 'react';
@@ -10,6 +11,10 @@ import { selectAuthChecked } from './features/auth/selectors';
 import AdminCabinet from './components/main/AdminCabinet';
 import Layout from './components/layouts/Layout';
 import Tasks from './features/tasks/Tasks';
+import Confirm from './features/auth/Confirm';
+import About from './components/Pages/About/About';
+import Home from './components/Pages/Home/Home';
+import Contacts from './components/Pages/Contacts/Contacts';
 
 function App(): JSX.Element {
 	const dispatch = useAppDispatch();
@@ -31,10 +36,14 @@ function App(): JSX.Element {
 		<HashRouter>
 			<Routes>
 				<Route path="/" element={<Layout />}>
+					<Route index element={<Home />} />
 					<Route path="/tasks" element={<Tasks />} />
-					<Route path="/auth/login" element={<Login />} />
-					<Route path="/auth/register" element={<Register />} />
-					<Route path="/admin/tasks" element={<AdminCabinet />} />
+					<Route path="login" element={<Login />} />
+					<Route path="register" element={<Register />} />
+					<Route path="confirm" element={<Confirm />} />
+					<Route path="about" element={<About />} />
+					{/* <Route path="contact" element={<Contacts />} /> */}
+					{/* <Route path="tasks" element={<AdminCabinet />} /> */}
 				</Route>
 			</Routes>
 		</HashRouter>

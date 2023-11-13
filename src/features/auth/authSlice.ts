@@ -17,17 +17,32 @@ export const login = createAsyncThunk('login', async (credentials: Credentials) 
 	if (!credentials.email.trim() || !credentials.password.trim()) {
 		throw new Error('Не все поля заполнены');
 	}
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	return api.login(credentials);
 });
 
-export const register = createAsyncThunk('api/register', async (data: RegisterData) => {
+// eslint-disable-next-line @typescript-eslint/require-await
+export const registerUser = createAsyncThunk('api/register', async (data: RegisterData) => {
 	// if (data.password !== data.passwordRepeat) {
 	// 	throw new Error('Пароли не совпадают');
 	// }
 	// if (!data.email.trim() || !data.password.trim()) {
 	// 	throw new Error('Не все поля заполнены');
 	// }
-	return api.register(data);
+	// eslint-disable-next-line import/namespace, @typescript-eslint/no-unsafe-call
+	return api.registerUser(data);
+});
+
+export const registerSetter = createAsyncThunk('api/register', async (data: RegisterData) => {
+	// if (data.password !== data.passwordRepeat) {
+	// 	throw new Error('Пароли не совпадают');
+	// }
+	// if (!data.email.trim() || !data.password.trim()) {
+	// 	throw new Error('Не все поля заполнены');
+	// }
+	// eslint-disable-next-line import/namespace, @typescript-eslint/no-unsafe-call
+	return api.registerSetter(data);
 });
 
 export const logout = createAsyncThunk('logout', api.logout);
@@ -64,11 +79,18 @@ const authSlice = createSlice({
 				state.user = undefined;
 				state.authChecked = true;
 			})
-			.addCase(register.fulfilled, (state, action) => {
+			// .addCase(registerSetter.fulfilled, (state, action) => {
+			// 	state.user = action.payload;
+			// 	state.registerFormError = undefined;
+			// })
+			// .addCase(registerSetter.rejected, (state, action) => {
+			// 	state.registerFormError = action.error.message;
+			// })
+			.addCase(registerUser.fulfilled, (state, action) => {
 				state.user = action.payload;
 				state.registerFormError = undefined;
 			})
-			.addCase(register.rejected, (state, action) => {
+			.addCase(registerUser.rejected, (state, action) => {
 				state.registerFormError = action.error.message;
 			});
 	},

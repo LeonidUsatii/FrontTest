@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
+import Futer from '../Futer/Futer';
 
 function Main(): JSX.Element {
 	return (
 		<>
 			<Navbar />
 			<Outlet />
-			<footer>Здесь будет футер</footer>
+			<Futer />
+			{/* <footer>Здесь будет футер</footer> */}
 		</>
 	);
 }
