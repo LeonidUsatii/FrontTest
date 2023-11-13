@@ -8,7 +8,7 @@ export async function user(): Promise<{
 	userName: string;
 	role: string;
 }> {
-	const res = await fetch('https://walrus-app-ie6jv.ondigitalocean.app/api/users/my/profile');
+	const res = await fetch('/api/users/my/profile');
 	if (res.status >= 400) {
 		const { message }: { message: string } = await res.json();
 		throw new Error(message);
@@ -17,7 +17,7 @@ export async function user(): Promise<{
 }
 
 export async function login(credentials: Credentials): Promise<User> {
-	const res = await fetch('https://walrus-app-ie6jv.ondigitalocean.app/api/login', {
+	const res = await fetch('/api/login', {
 		method: 'POST',
 		body: `username=${credentials.email}&password=${credentials.password}`,
 		headers: {
@@ -34,7 +34,7 @@ export async function login(credentials: Credentials): Promise<User> {
 }
 
 export async function registerUser(data: RegisterData): Promise<{ id: number; email: string }> {
-	const res = await fetch('https://walrus-app-ie6jv.ondigitalocean.app/api/registerUser', {
+	const res = await fetch('/api/registerUser', {
 		method: 'POST',
 		body: JSON.stringify(data),
 		headers: {
@@ -56,7 +56,7 @@ export async function registerUser(data: RegisterData): Promise<{ id: number; em
 }
 
 export async function registerSetter(data: RegisterData): Promise<{ id: number; email: string }> {
-	const res = await fetch('https://walrus-app-ie6jv.ondigitalocean.app/api/registerSetter', {
+	const res = await fetch('/api/registerSetter', {
 		method: 'POST',
 		body: JSON.stringify(data),
 		headers: {
