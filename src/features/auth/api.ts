@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import Credentials from './types/Credentials';
 import RegisterData from './types/RegisterData';
 import User from './types/User';
