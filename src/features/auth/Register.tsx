@@ -1,8 +1,9 @@
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable prettier/prettier */
 /* eslint-disable import/no-extraneous-dependencies */
-import { Button, Col, Form, InputGroup, Modal, Nav, Row } from 'react-bootstrap';
+import { Button, Col, Form, InputGroup, Modal, Nav, Row, FormControl } from 'react-bootstrap';
 //import styles from './Registration.module.css';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +13,8 @@ import { selectRegisterFormError } from './selectors';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import styles from './Register.module.css';
 import Conf from './ConfirmationReg';
+import eyeoff from './img/eyeclosed.svg';
+import eyeonn from './img/eyee.svg';
 
 const none: string = styles.qwertynone;
 const block: string = styles.qwertyblock;
@@ -43,6 +46,7 @@ const Register = (): JSX.Element => {
 	const handleCloseConf = () => setShowConf(false);
 	// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 	const handleShowConf = () => setShowConf(true);
+	const [showPassword, setShowPassword] = useState(false);
 
 	// const [validated, setValidated] = useState(false);
 
@@ -211,19 +215,21 @@ const Register = (): JSX.Element => {
 	// function handleClose(): void {
 	// 	throw new Error('Function not implemented.');
 	// }
-
+	const handleTogglePasswordVisibility = () => {
+		setShowPassword(!showPassword);
+	};
 	return (
 		<>
 			<div className={block}>
 				<Nav>
 					<Button variant="primary" className="mr-2" onClick={handleShow}>
-						Registration
+						Anmeldung
 					</Button>
 				</Nav>
 
 				<Modal show={show} onHide={handleClose} id="modal-registration">
 					<Modal.Header closeButton>
-						<Modal.Title>Registration</Modal.Title>
+						<Modal.Title>Anmeldung</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<form className="auth-form" onSubmit={setter ? handleSubmitSetter : handleSubmitUser}>
@@ -235,7 +241,7 @@ const Register = (): JSX.Element => {
 							<Row className="mb-3">
 								<Form.Group as={Col} md="4" controlId="validationCustom01">
 									<label htmlFor="name-input" className="form-label">
-										First Name
+										Vorname
 									</label>
 									<input
 										type="text"
@@ -249,7 +255,7 @@ const Register = (): JSX.Element => {
 								</Form.Group>
 								<Form.Group as={Col} md="4" controlId="validationCustom01">
 									<label htmlFor="name-input" className="form-label">
-										Last Name
+										Nachname
 									</label>
 									<input
 										type="text"
@@ -262,7 +268,7 @@ const Register = (): JSX.Element => {
 								</Form.Group>
 								<Form.Group as={Col} md="4" controlId="validationCustom01">
 									<label htmlFor="name-input" className="form-label">
-										User Name
+										Nutzername
 									</label>
 									<InputGroup hasValidation>
 										<InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
@@ -280,7 +286,7 @@ const Register = (): JSX.Element => {
 							<Row className="mb-3">
 								<Form.Group as={Col} md="8" controlId="validationCustom01">
 									<label htmlFor="name-input" className="form-label">
-										City
+										Stadt
 									</label>
 									<input
 										type="text"
@@ -293,7 +299,7 @@ const Register = (): JSX.Element => {
 								</Form.Group>
 								<Form.Group as={Col} md="4" controlId="validationCustom01">
 									<label htmlFor="name-input" className="form-label">
-										Zip
+										Postleitzahl
 									</label>
 									<input
 										type="text"
@@ -323,32 +329,58 @@ const Register = (): JSX.Element => {
 							<Row className="mb-3">
 								<Form.Group as={Col} md="12" controlId="validationCustom01">
 									<label htmlFor="password-input" className="form-label">
-										Password
+										Passwort
 									</label>
-									<input
-										type="password"
-										className={`form-control ${error ? 'is-invalid' : ''}`}
-										id="password-input"
-										name="password"
-										value={password}
-										onChange={handlePasswordChange}
-									/>
+									<InputGroup>
+										<FormControl
+											type={showPassword ? 'text' : 'password'}
+											className={`form-control ${error ? 'is-invalid' : ''}`}
+											id="password-input"
+											name="password"
+											value={password}
+											onChange={handlePasswordChange}
+										/>
+										<Button
+											variant="outline-secondary"
+											onClick={handleTogglePasswordVisibility}
+											className={`custom-button ${styles.qwertyb}`}
+										>
+											<img
+												src={showPassword ? eyeoff : eyeonn}
+												alt="eye"
+												className={`custom-button ${styles.qwertyb}`}
+											/>
+										</Button>
+									</InputGroup>
 								</Form.Group>
 							</Row>
 
 							<Row className="mb-3">
 								<Form.Group as={Col} md="12" controlId="validationCustom01">
 									<label htmlFor="password-repeat-input" className="form-label">
-										Repeat password
+										Passwort wiederholen
 									</label>
-									<input
-										type="password"
-										className={`form-control ${error ? 'is-invalid' : ''}`}
-										id="password-repeat-input"
-										name="passwordRepeat"
-										value={passwordRepeat}
-										onChange={handlePasswordRepeatChange}
-									/>
+									<InputGroup>
+										<FormControl
+											type={showPassword ? 'text' : 'password'} // изменение типа в зависимости от состояния
+											className={`form-control ${error ? 'is-invalid' : ''}`}
+											id="password-repeat-input"
+											name="passwordRepeat"
+											value={passwordRepeat}
+											onChange={handlePasswordRepeatChange}
+										/>
+										<Button
+											variant="outline-secondary"
+											onClick={handleTogglePasswordVisibility}
+											className={`custom-button ${styles.qwertyb}`}
+										>
+											<img
+												src={showPassword ? eyeoff : eyeonn}
+												alt="eye"
+												className={`custom-button ${styles.qwertyb}`}
+											/>
+										</Button>
+									</InputGroup>
 								</Form.Group>
 							</Row>
 							<Row className="mb-3">
@@ -358,7 +390,7 @@ const Register = (): JSX.Element => {
 										className={`form-control}`}
 										checked={setter}
 										onChange={IsSetter}
-										label="I'm ready to adopt a dog for a while."
+										label="Ich bin bereit, für eine Weile einen Hund zu adoptieren."
 										feedbackType="invalid"
 									/>
 								</Form.Group>
@@ -374,7 +406,7 @@ const Register = (): JSX.Element => {
 										onChange={(e) => setSize(e.target.value)}
 									>
 										<option value="" disabled>
-											Size Of Dog
+											Größe des Hundes
 										</option>
 										<option value="A_MINI">MINI</option>
 										<option value="B_SMALL">SMALL</option>
@@ -385,13 +417,13 @@ const Register = (): JSX.Element => {
 								</Form.Group>
 							</Row>
 							<button type="submit" className="btn btn-primary">
-								Registration
+								Anmeldung
 							</button>
 						</form>
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant="secondary" onClick={handleClose}>
-							Close
+							Schließen
 						</Button>
 					</Modal.Footer>
 				</Modal>
@@ -403,11 +435,11 @@ const Register = (): JSX.Element => {
 
 			<Modal show={showConf} onHide={handleCloseConf}>
 				<Modal.Header closeButton>
-					<Modal.Title>Окончание регистрации</Modal.Title>
+					<Modal.Title>Ende der Registrierung</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					Hallo, {userName} для завершения регистрации зайдите почту {email} и перейдите по
-					отправленной ссылке.
+					Hallo, {firstName} um die Registrierung abzuschließen, gehen Sie zu Ihrer E-Mail-Adresse{' '}
+					{email} und geh zu Link gesendet.
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleCloseConf}>

@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable prettier/prettier */
 import { useCallback } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
@@ -40,13 +41,19 @@ function Navout(): JSX.Element {
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
 						<Nav.Link as={Link} to="/">
-							Home
+							Heim
+						</Nav.Link>
+						<Nav.Link as={Link} to="/clinics">
+							Clinics
+						</Nav.Link>
+						<Nav.Link as={Link} to="/kennels">
+							Kennels
 						</Nav.Link>
 						<Nav.Link as={Link} to="/about">
-							About
+							Um
 						</Nav.Link>
-						<Nav.Link as={Link} to="/login">
-							Contact
+						<Nav.Link as={Link} to="/contact">
+							Kontakt
 						</Nav.Link>
 					</Nav>
 					<Username />

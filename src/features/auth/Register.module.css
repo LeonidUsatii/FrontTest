@@ -7,7 +7,7 @@
 }
 
 .qwertyblock button {
-	margin-right: 150px;
+	/* margin-right: 150px; */
 	/* margin:  2px 5px; */
 	background-color: #777472;
 	border-color: #777472;
@@ -15,4 +15,24 @@
 
 .qwertymodal {
 	display: none;
+}
+.qwertyblock img {
+	background-color: white;
+	cursor: pointer;
+}
+.qwertyblock img:active {
+	background-color: transparent;
+}
+.qwertyb {
+	margin: 0;
+	padding: 0;
+	background-color: white;
+	border: 0.5px solid rgb(213, 208, 208);
+	cursor: pointer;
+}
+.qwertyb .btn:hover {
+	background-color: white;
+}
+.qwertyb .btn:active {
+	background-color: white;
 }

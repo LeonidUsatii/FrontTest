@@ -1,10 +1,13 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { Form, useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectLoginFormError } from './selectors';
 import { getUser, login, resetLoginFormError } from './authSlice';
 import styles from './Login.module.css';
-import { Button, Modal, Nav, Row } from 'react-bootstrap';
+import { Button, Modal, Nav, Row, FormControl, InputGroup } from 'react-bootstrap';
+import eyeoff from './img/eyeclosed.svg';
+import eyeonn from './img/eyee.svg';
 
 const none: string = styles.qwertynone;
 const block: string = styles.qwertyblock;
@@ -15,6 +18,7 @@ function Login(): JSX.Element {
 	const error = useAppSelector(selectLoginFormError);
 	const [email, setName] = useState('');
 	const [password, setPassword] = useState('');
+	const [showPassword, setShowPassword] = useState(false);
 
 	const [show1, setShow] = useState(false);
 	// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -65,21 +69,24 @@ function Login(): JSX.Element {
 		[dispatch]
 	);
 
+	const handleTogglePasswordVisibility = () => {
+		setShowPassword(!showPassword);
+	};
 	return (
 		<div className={block}>
 			<Nav>
 				<Button variant="primary" className="mr-2" onClick={handleShow1}>
-					Log In
+					Betreten
 				</Button>
 			</Nav>
 
 			<Modal show={show1} onHide={handleClose} id="modal-avtorisation">
 				<Modal.Header closeButton>
-					<Modal.Title>Log In</Modal.Title>
+					<Modal.Title>Betreten</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<form className="auth-form" onSubmit={handleSubmit}>
-						<h2>Вход</h2>
+						{/* <h2>Вход</h2> */}
 						{error && (
 							<div className="invalid-feedback mb-3" style={{ display: 'block' }}>
 								{error}
@@ -87,7 +94,7 @@ function Login(): JSX.Element {
 						)}
 						<div className="mb-3">
 							<label htmlFor="name-input" className="form-label">
-								Имя
+								E-mail
 							</label>
 							<input
 								type="text"
@@ -100,25 +107,38 @@ function Login(): JSX.Element {
 						</div>
 						<div className="mb-3">
 							<label htmlFor="password-input" className="form-label">
-								Пароль
+								Passwort
 							</label>
-							<input
-								type="password"
-								className={`form-control ${error ? 'is-invalid' : ''}`}
-								id="password-input"
-								name="password"
-								value={password}
-								onChange={handlePasswordChange}
-							/>
+							<InputGroup>
+								<FormControl
+									type={showPassword ? 'text' : 'password'}
+									className={`form-control ${error ? 'is-invalid' : ''}`}
+									id="password-input"
+									name="password"
+									value={password}
+									onChange={handlePasswordChange}
+								/>
+								<Button
+									variant="outline-secondary"
+									onClick={handleTogglePasswordVisibility}
+									className={`custom-button ${styles.qwertyb}`}
+								>
+									<img
+										src={showPassword ? eyeoff : eyeonn}
+										alt="eye"
+										className={`custom-button ${styles.qwertyb}`}
+									/>
+								</Button>
+							</InputGroup>
 						</div>
 						<button type="submit" className="btn btn-primary">
-							Войти
+							Betreten
 						</button>
 					</form>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
-						Close
+						Schließen
 					</Button>
 				</Modal.Footer>
 			</Modal>
