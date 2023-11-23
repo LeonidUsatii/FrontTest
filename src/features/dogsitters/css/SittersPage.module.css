@@ -5,6 +5,7 @@
 	height: 100vh;
 	margin-top: 30px;
 }
+
 .title {
 	color: black;
 	width: 80%;
@@ -15,7 +16,7 @@
 	text-shadow: 2px 2px 4px rgb(148, 235, 145);
 }
 .searchSitters {
-	width: 70%;
+	width: 50%;
 	height: 300px;
 	background-color: #f9f9f9;
 	display: flex;
